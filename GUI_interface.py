@@ -110,6 +110,12 @@ WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', onvalue=True, of
 CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", onvalue=True, offvalue=False, variable=varCO2)  
 RecordButton = Tkinter.Button(top, height=2, width=20, text ="Record Data", command = weather_test)
 
+AirButton.pack()   
+WeatherButton.pack()
+CO2Button.pack()
+RecordButton.pack()
+
+top.mainloop()
     
 
 '''
