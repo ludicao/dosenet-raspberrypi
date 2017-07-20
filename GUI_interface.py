@@ -6,30 +6,6 @@ import weather_DAQ
 import air_quality_DAQ
 import adc_DAQ
 
-app = gui("Adafruit Weather Sensor", "800x400")
-
-wdaq = weather_DAQ.weather_DAQ()
-aqdaq = air_quality_DAQ.air_quality_DAQ()
-adcdaq = adc_DAQ.adc_DAQ()
-
-top = Tkinter.Tk()
-varAir = Tkinter.BooleanVar()
-varCO2 = Tkinter.BooleanVar()
-varWeather = Tkinter.BooleanVar()    
-
-AirButton = Tkinter.Checkbutton(top, text="Air Quality", onvalue=True, offvalue=False, variable=varAir)     
-WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', onvalue=True, offvalue=False, variable=varWeather)
-CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", onvalue=True, offvalue=False, variable=varCO2)
-RecordButton = Tkinter.Button(top, text="Record Data", height=2, width=20, command = weather_test)  
-
-AirButton.pack()   
-WeatherButton.pack()
-CO2Button.pack()
-RecordButton.pack()
-top.mainloop()
-
-print("varAir = {}, varCO2 = {}, varWeather = {}".format(varAir.get(),varCO2.get(),varWeather.get()))
-
 def weather_test():
     if varCO2.get(): 
         print("create CO2 file")
@@ -154,6 +130,31 @@ def weather_test():
         stopButton3.pack()
     
         top3.mainloop()
+
+
+app = gui("Adafruit Weather Sensor", "800x400")
+
+wdaq = weather_DAQ.weather_DAQ()
+aqdaq = air_quality_DAQ.air_quality_DAQ()
+adcdaq = adc_DAQ.adc_DAQ()
+
+top = Tkinter.Tk()
+varAir = Tkinter.BooleanVar()
+varCO2 = Tkinter.BooleanVar()
+varWeather = Tkinter.BooleanVar()    
+
+AirButton = Tkinter.Checkbutton(top, text="Air Quality", onvalue=True, offvalue=False, variable=varAir)     
+WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', onvalue=True, offvalue=False, variable=varWeather)
+CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", onvalue=True, offvalue=False, variable=varCO2)
+RecordButton = Tkinter.Button(top, text="Record Data", height=2, width=20, command = weather_test)  
+
+AirButton.pack()   
+WeatherButton.pack()
+CO2Button.pack()
+RecordButton.pack()
+top.mainloop()
+
+print("varAir = {}, varCO2 = {}, varWeather = {}".format(varAir.get(),varCO2.get(),varWeather.get()))
     
 
 '''
