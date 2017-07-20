@@ -104,7 +104,6 @@ def weather_test(btn):
     WeatherButton.pack()
     AirButton.pack()
     CO2Button.pack()
-    startButton.pack()
     stopButton.pack()
     PressureButton.pack()
     TempButton.pack()
@@ -112,7 +111,11 @@ def weather_test(btn):
 
     top.mainloop()
 
+def weather_plot(btn):
+    wdaq.plotdata()    
 
+
+'''
 def air_quality_test(btn):
     aqdaq.create_file()
     top = Tkinter.Tk()
@@ -154,7 +157,7 @@ def CO2_test(btn):
 def weather_plot(btn):
 
     wdaq.plotdata()    
-
+'''
 app.addButton("Record Weather Data", weather_test)
 app.setButtonWidth("Record Weather Data", "30")
 app.setButtonHeight("Record Weather Data","4")
