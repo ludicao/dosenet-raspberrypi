@@ -1,5 +1,5 @@
 
-i#!/usr/bin/env/python
+#!/usr/bin/env/python
 from appJar import gui
 import Tkinter
 import weather_DAQ
