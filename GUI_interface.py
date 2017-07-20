@@ -28,7 +28,7 @@ def weather_test():
         aqdaq.create_file()
     if varWeather.get(): 
         wdaq.create_file() 
-    if varWeather.get(): 
+    if varWeather.get() == 1: 
         top1 = Tkinter.Tk()
         global job1
         global jobpress
