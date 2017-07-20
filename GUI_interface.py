@@ -21,7 +21,7 @@ varWeather = Tkinter.BooleanVar()
 varWeather.set(True)    
 
 
-def weather_test(btn):
+def weather_test():
     if varCO2.get(): 
         adcdaq.create_file()
     if varAir.get(): 
