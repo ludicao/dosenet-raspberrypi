@@ -21,13 +21,18 @@ varWeather.set(True)
 def make_run_gui():
     top1 = Tkinter.Tk()
     global job1
-    #global jobpress
-    #global jobhumid
-    #global jobtemp
+    global jobpress
+    global jobhumid
+    global jobtemp
+    global jobco2
+    global jobaq
     job1 = None
-    #jobpress = None
-    #jobhumid = None
-    #jobtemp = None
+    jobpress = None
+    jobhumid = None
+    jobtemp = None
+    jobco2 = None
+    jobaq = None
+
     def start():
         global job1
         if varWeather.get(): 
@@ -37,15 +42,69 @@ def make_run_gui():
         if varCO2.get():
             adcdaq.start()
         job1=top1.after(1000,start)
+
     def stop():
         global job1
-        top.after_cancel(job1)
+        top1.after_cancel(job1)
+
+    def press():
+        global jobpress
+        global jobhumid
+        global jobtemp
+        if jobhumid is not None:
+            top1.after_cancel(jobhumid)
+            jobhumid = None
+            wdaq.close(2)
+        if jobtemp is not None:
+            top1.after_cancel(jobtemp)
+            jobtemp = None
+            wdaq.close(1)
+        wdaq.press()
+        jobpress=top.after(1000,press)
+        
+    def temp():
+        global jobpress
+        global jobhumid
+        global jobtemp
+        if jobhumid is not None:
+            top1.after_cancel(jobhumid)
+            jobhumid = None
+            wdaq.close(2)
+        if jobpress is not None:
+            top1.after_cancel(jobpress)
+            jobpress = None
+            wdaq.close(3)
+        wdaq.temp()
+        jobtemp=top.after(1000,temp)
+        
+    def humid():
+        global jobpress
+        global jobhumid
+        global jobtemp
+        if jobpress is not None:
+            top1.after_cancel(jobpress)
+            jobpress = None
+            wdaq.close(3)
+        if jobtemp is not None:
+            top1.after_cancel(jobtemp)
+            jobtemp = None
+            wdaq.close(1)
+        wdaq.humid()
+        jobhumid=top.after(1000,humid)
 
     startButton1 = Tkinter.Button(top1, height=2, width=20, text ="Start", command = start)
     stopButton1 = Tkinter.Button(top1, height=2, width=20, text ="Stop", command = stop)
     startButton1.pack()
     stopButton1.pack()
-    
+
+    if varWeather.get():
+        PressureButton = Tkinter.Button(top1, height=2, width=20, text = "Pressure", command = press)
+        PressureButton.pack()
+        TempButton = Tkinter.Button(top1, height=2, width=20, text = "Temperature", command = temp)
+        TempButton.pack()
+        HumidButton = Tkinter.Button(top1, height=2, width=20, text = "Humidity", command = humid)
+        HumidButton.pack()
+
     top1.mainloop()
 
 def weather_test():
@@ -80,98 +139,8 @@ top.mainloop()
 '''
 
 
-        def press():
-            global jobpress
-            global jobhumid
-            global jobtemp
-            if jobhumid is not None:
-                top1.after_cancel(jobhumid)
-                jobhumid = None
-                wdaq.close(2)
-            if jobtemp is not None:
-                top1.after_cancel(jobtemp)
-                jobtemp = None
-                wdaq.close(1)
-            wdaq.press()
-            jobpress=top.after(1000,press)
-        
-        def temp():
-            global jobpress
-            global jobhumid
-            global jobtemp
-            if jobhumid is not None:
-                top1.after_cancel(jobhumid)
-                jobhumid = None
-                wdaq.close(2)
-            if jobpress is not None:
-                top1.after_cancel(jobpress)
-                jobpress = None
-                wdaq.close(3)
-            wdaq.temp()
-            jobtemp=top.after(1000,temp)
-        
-        def humid():
-            global jobpress
-            global jobhumid
-            global jobtemp
-            if jobpress is not None:
-                top1.after_cancel(jobpress)
-                jobpress = None
-                wdaq.close(3)
-            if jobtemp is not None:
-                top1.after_cancel(jobtemp)
-                jobtemp = None
-                wdaq.close(1)
-            wdaq.humid()
-            jobhumid=top.after(1000,humid)
 
-        PressureButton = Tkinter.Button(top1, height=2, width=20, text = "Pressure", command = press)
-        TempButton = Tkinter.Button(top1, height=2, width=20, text = "Temperature", command = temp)
-        HumidButton = Tkinter.Button(top1, height=2, width=20, text = "Humidity", command = humid)
-    
-        PressureButton.pack()
-        TempButton.pack()
-        HumidButton.pack()
 
-    
-    if varAir.get(): 
-        global job2
-        job2=None
-        top2 = Tkinter.Tk()
-        def start():
-            global job2
-            aqdaq.start()
-            job2=top2.after(1000,start)
-        def stop():
-            global job2
-            top2.after_cancel(job2)
-    
-        startButton2 = Tkinter.Button(top2, height=2, width=20, text ="Start", command = start)
-        stopButton2 = Tkinter.Button(top2, height=2, width=20, text ="Stop", command = stop)            
-        startButton2.pack()
-        stopButton2.pack()
-    
-        top2.mainloop()
-    
-            
-    if varCO2.get(): 
-        global job3
-        job3=None
-        top3 = Tkinter.Tk()
-        def start():
-            global job3
-            adcdaq.start()
-            job3=top3.after(1000,start)
-        def stop():
-            global job3
-            top3.after_cancel(job3)
-            
-        startButton3 = Tkinter.Button(top3, height=2, width=20, text ="Start", command = start)
-        stopButton3 = Tkinter.Button(top3, height=2, width=20, text ="Stop", command = stop)            
-        startButton3.pack()
-        stopButton3.pack()
-    
-        top3.mainloop()
 
 def air_quality_test(btn):
     aqdaq.create_file()
