@@ -131,6 +131,8 @@ def weather_test():
     
         top3.mainloop()
 
+def print_check():
+    print("varAir = {}, varCO2 = {}, varWeather = {}".format(varAir.get(),varCO2.get(),varWeather.get()))    
 
 app = gui("Adafruit Weather Sensor", "800x400")
 
@@ -143,7 +145,7 @@ varAir = Tkinter.BooleanVar()
 varCO2 = Tkinter.BooleanVar()
 varWeather = Tkinter.BooleanVar()    
 
-AirButton = Tkinter.Checkbutton(top, text="Air Quality", onvalue=True, offvalue=False, variable=varAir)     
+AirButton = Tkinter.Checkbutton(top, text="Air Quality", onvalue=True, offvalue=False, variable=varAir, command = print_check)     
 WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', onvalue=True, offvalue=False, variable=varWeather)
 CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", onvalue=True, offvalue=False, variable=varCO2)
 RecordButton = Tkinter.Button(top, text="Record Data", height=2, width=20, command = weather_test)  
@@ -152,8 +154,6 @@ AirButton.pack()
 WeatherButton.pack()
 CO2Button.pack()
 RecordButton.pack()
-
-print("varAir = {}, varCO2 = {}, varWeather = {}".format(varAir.get(),varCO2.get(),varWeather.get()))
     
 top.mainloop()
 
