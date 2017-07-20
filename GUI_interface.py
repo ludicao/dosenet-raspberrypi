@@ -1,4 +1,3 @@
-
 #!/usr/bin/env/python
 from appJar import gui
 import Tkinter
@@ -224,50 +223,3 @@ CO2Button.pack()
 RecordButton.pack()
     
 top.mainloop()
-
-'''
-
-
-
-
-
-def air_quality_test(btn):
-    aqdaq.create_file()
-    top = Tkinter.Tk()
-    def start():
-        global job2
-        aqdaq.start()
-        job2=top.after(1000,start)
-    def stop():
-        global job2
-        top.after_cancel(job2)
-
-    startButton = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
-    stopButton = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)
-
-    startButton.pack()
-    stopButton.pack()
-
-    top.mainloop()
-
-def CO2_test(btn):
-    adcdaq.create_file()
-    top = Tkinter.Tk()
-    def start():
-        global job3
-        adcdaq.start()
-        job3=top.after(1000,start)
-    def stop():
-        global job3
-        top.after_cancel(job3)
-    
-    startButton = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
-    stopButton = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)
-
-    startButton.pack()
-    stopButton.pack()
-
-    top.mainloop()
-
-    '''
-
