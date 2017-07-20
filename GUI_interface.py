@@ -105,6 +105,8 @@ def weather_test():
     top.mainloop()
     
     if varAir.get(): 
+        global job2
+        job2=None
         top = Tkinter.Tk()
         def start():
             global job2
@@ -123,6 +125,8 @@ def weather_test():
     
             
     if varCO2.get(): 
+        global job3
+        job3=None
         top = Tkinter.Tk()
         def start():
             global job3
