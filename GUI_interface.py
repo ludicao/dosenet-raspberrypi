@@ -143,7 +143,7 @@ def make_run_gui():
             top1.after_cancel(jobhumid)
             jobhumid = None
             wdaq.close(2)
-        adcdaq.plot_CO2()
+        adcdaq.plot_CO2(1)
         jobco2=top1.after(1000,CO2)
         
     def airquality():
