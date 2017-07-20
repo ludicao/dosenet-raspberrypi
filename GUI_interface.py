@@ -12,94 +12,90 @@ wdaq = weather_DAQ.weather_DAQ()
 aqdaq = air_quality_DAQ.air_quality_DAQ()
 adcdaq = adc_DAQ.adc_DAQ()
 
-global job1
-global jobpress
-global jobhumid
-global jobtemp
-job1 = None
-jobpress = None
-jobhumid = None
-jobtemp = None
+top = Tkinter.Tk()
+varAir = Tkinter.BooleanVar()
+varAir.set(True)
+varCO2 = Tkinter.BooleanVar()
+varCO2.set(True)
+varWeather = Tkinter.BooleanVar()
+varWeather.set(True)    
+
 
 def weather_test(btn):
-    wdaq.create_file()
-    top = Tkinter.Tk()
-    varAir = Tkinter.BooleanVar()
-    varAir.set(True)
-    varCO2 = Tkinter.BooleanVar()
-    varCO2.set(True)
-    varWeather = Tkinter.BooleanVar()
-    varWeather.set(True)    
-    def start():
+    if varCO2.get(): 
+        adcdaq.create_file()
+    if varAir.get(): 
+        aqdaq.create_file()
+    if varWeather.get(): 
+        wdaq.create_file() 
+    if varWeather.get(): 
+        top = Tkinter.Tk()
         global job1
-        if varWeather.get():
+        global jobpress
+        global jobhumid
+        global jobtemp
+        job1 = None
+        jobpress = None
+        jobhumid = None
+        jobtemp = None
+        def start():
+            global job1
             wdaq.start()
-        if varCO2.get():
-            adcdaq.start()
-        if varAir.get():
-            aqdaq.start() 
-        job1=top.after(1000,start)
-    def stop():
-        global job1
-        top.after_cancel(job1)
-    def press():
-        global jobpress
-        global jobhumid
-        global jobtemp
-        if jobhumid is not None:
-            top.after_cancel(jobhumid)
-            jobhumid = None
-            wdaq.close(2)
-        if jobtemp is not None:
-            top.after_cancel(jobtemp)
-            jobtemp = None
-            wdaq.close(1)
-        wdaq.press()
-        jobpress=top.after(1000,press)
+            job1=top.after(1000,start)
+        def stop():
+            global job1
+            top.after_cancel(job1)
+        def press():
+            global jobpress
+            global jobhumid
+            global jobtemp
+            if jobhumid is not None:
+                top.after_cancel(jobhumid)
+                jobhumid = None
+                wdaq.close(2)
+            if jobtemp is not None:
+                top.after_cancel(jobtemp)
+                jobtemp = None
+                wdaq.close(1)
+            wdaq.press()
+            jobpress=top.after(1000,press)
         
-    def temp():
-        global jobpress
-        global jobhumid
-        global jobtemp
-        if jobhumid is not None:
-            top.after_cancel(jobhumid)
-            jobhumid = None
-            wdaq.close(2)
-        if jobpress is not None:
-            top.after_cancel(jobpress)
-            jobpress = None
-            wdaq.close(3)
-        wdaq.temp()
-        jobtemp=top.after(1000,temp)
+        def temp():
+            global jobpress
+            global jobhumid
+            global jobtemp
+            if jobhumid is not None:
+                top.after_cancel(jobhumid)
+                jobhumid = None
+                wdaq.close(2)
+            if jobpress is not None:
+                top.after_cancel(jobpress)
+                jobpress = None
+                wdaq.close(3)
+            wdaq.temp()
+            jobtemp=top.after(1000,temp)
         
-    def humid():
-        global jobpress
-        global jobhumid
-        global jobtemp
-        if jobpress is not None:
-            top.after_cancel(jobpress)
-            jobpress = None
-            wdaq.close(3)
-        if jobtemp is not None:
-            top.after_cancel(jobtemp)
-            jobtemp = None
-            wdaq.close(1)
-        wdaq.humid()
-        jobhumid=top.after(1000,humid)
-     
-
-    AirButton = Tkinter.Checkbutton(top, text="Air Quality", onvalue=True, offvalue=False, variable=varAir)     
-    WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', onvalue=True, offvalue=False, variable=varWeather)
-    CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", onvalue=True, offvalue=False, variable=varCO2)  
+        def humid():
+            global jobpress
+            global jobhumid
+            global jobtemp
+            if jobpress is not None:
+                top.after_cancel(jobpress)
+                jobpress = None
+                wdaq.close(3)
+            if jobtemp is not None:
+                top.after_cancel(jobtemp)
+                jobtemp = None
+                wdaq.close(1)
+            wdaq.humid()
+            jobhumid=top.after(1000,humid)
+    
     startButton = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
     stopButton = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)
     PressureButton = Tkinter.Button(top, height=2, width=20, text = "Pressure", command = press)
     TempButton = Tkinter.Button(top, height=2, width=20, text = "Temperature", command = temp)
     HumidButton = Tkinter.Button(top, height=2, width=20, text = "Humidity", command = humid)
     
-    WeatherButton.pack()
-    AirButton.pack()
-    CO2Button.pack()
     startButton.pack()
     stopButton.pack()
     PressureButton.pack()
@@ -107,10 +103,14 @@ def weather_test(btn):
     HumidButton.pack()
 
     top.mainloop()
-    
-def weather_plot(btn):
-    wdaq.plotdata()    
+  
 
+AirButton = Tkinter.Checkbutton(top, text="Air Quality", onvalue=True, offvalue=False, variable=varAir)     
+WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', onvalue=True, offvalue=False, variable=varWeather)
+CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", onvalue=True, offvalue=False, variable=varCO2)  
+RecordButton = Tkinter.Button(top, height=2, width=20, text ="Record Data", command = weather_test)
+
+    
 
 '''
 def air_quality_test(btn):
@@ -156,12 +156,3 @@ def weather_plot(btn):
     wdaq.plotdata()  
     '''
 
-app.addButton("Record Weather Data", weather_test)
-app.setButtonWidth("Record Weather Data", "30")
-app.setButtonHeight("Record Weather Data","4")
-app.setButtonFont("20",font="Helvetica")
-app.addButton("Plot Weather Data",weather_plot)
-app.setButtonWidth("Plot Weather Data","30")
-app.setButtonHeight("Plot Weather Data","4")
-app.setButtonFont("20",font="Helvetica")
-app.go()
