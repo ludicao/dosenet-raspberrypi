@@ -12,26 +12,12 @@ adcdaq = adc_DAQ.adc_DAQ()
 
 top = Tkinter.Tk()
 varAir = Tkinter.BooleanVar()
+varAir.set(True)
 varCO2 = Tkinter.BooleanVar()
-varWeather = Tkinter.BooleanVar()    
+varCO2.set(True)
+varWeather = Tkinter.BooleanVar()
+varWeather.set(True)
 
-def print_check():
-    print("varAir = {}, varCO2 = {}, varWeather = {}".format(varAir.get(),varCO2.get(),varWeather.get()))    
-
-
-AirButton = Tkinter.Checkbutton(top, text="Air Quality", variable=varAir, command = print_check)     
-WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', variable=varWeather, command = print_check)
-CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", variable=varCO2, command = print_check)
-#RecordButton = Tkinter.Button(top, text="Record Data", height=2, width=20, command = weather_test)  
-
-AirButton.pack()   
-WeatherButton.pack()
-CO2Button.pack()
-#RecordButton.pack()
-    
-top.mainloop()
-
-'''
 def weather_test():
     if varCO2.get(): 
         print("create CO2 file")
@@ -42,6 +28,24 @@ def weather_test():
     if varWeather.get(): 
         print("create weather file")
         wdaq.create_file() 
+
+def print_check():
+    print("varAir = {}, varCO2 = {}, varWeather = {}".format(varAir.get(),varCO2.get(),varWeather.get()))    
+
+
+AirButton = Tkinter.Checkbutton(top, text="Air Quality", variable=varAir, command = print_check)     
+WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', variable=varWeather, command = print_check)
+CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", variable=varCO2, command = print_check)
+RecordButton = Tkinter.Button(top, text="Record Data", height=2, width=20, command = weather_test)  
+
+AirButton.pack()   
+WeatherButton.pack()
+CO2Button.pack()
+RecordButton.pack()
+    
+top.mainloop()
+
+'''
 
         top1 = Tkinter.Tk()
         global job1
