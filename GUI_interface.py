@@ -14,19 +14,19 @@ adcdaq = adc_DAQ.adc_DAQ()
 
 top = Tkinter.Tk()
 varAir = Tkinter.BooleanVar()
-varAir.set(True)
 varCO2 = Tkinter.BooleanVar()
-varCO2.set(True)
-varWeather = Tkinter.BooleanVar()
-varWeather.set(True)    
+varWeather = Tkinter.BooleanVar()    
 
 
 def weather_test():
     if varCO2.get(): 
+        print("create CO2 file")
         adcdaq.create_file()
     if varAir.get(): 
+        print("create Air file")
         aqdaq.create_file()
     if varWeather.get(): 
+        print("create weather file")
         wdaq.create_file() 
     if varWeather.get(): 
         top1 = Tkinter.Tk()
