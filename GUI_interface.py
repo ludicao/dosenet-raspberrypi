@@ -18,6 +18,36 @@ varCO2.set(True)
 varWeather = Tkinter.BooleanVar()
 varWeather.set(True)
 
+def make_run_gui():
+    top1 = Tkinter.Tk()
+    global job1
+    #global jobpress
+    #global jobhumid
+    #global jobtemp
+    job1 = None
+    #jobpress = None
+    #jobhumid = None
+    #jobtemp = None
+    def start():
+        global job1
+        if varWeather.get(): 
+            wdaq.start()
+        if varAir.get():
+            aqdaq.start()
+        if varCO2.get():
+            adcdaq.start()
+        job1=top1.after(1000,start)
+    def stop():
+        global job1
+        top.after_cancel(job1)
+
+    startButton1 = Tkinter.Button(top1, height=2, width=20, text ="Start", command = start)
+    stopButton1 = Tkinter.Button(top1, height=2, width=20, text ="Stop", command = stop)
+    startButton1.pack()
+    stopButton1.pack()
+    
+    top1.mainloop()
+
 def weather_test():
     if varCO2.get(): 
         print("create CO2 file")
@@ -27,7 +57,9 @@ def weather_test():
         aqdaq.create_file()
     if varWeather.get(): 
         print("create weather file")
-        wdaq.create_file() 
+        wdaq.create_file()
+
+    make_run_gui()
 
 def print_check():
     print("varAir = {}, varCO2 = {}, varWeather = {}".format(varAir.get(),varCO2.get(),varWeather.get()))    
@@ -47,25 +79,6 @@ top.mainloop()
 
 '''
 
-        top1 = Tkinter.Tk()
-        global job1
-        global jobpress
-        global jobhumid
-        global jobtemp
-        job1 = None
-        jobpress = None
-        jobhumid = None
-        jobtemp = None
-        def start():
-            global job1
-            if varWeather.get(): 
-                wdaq.start()
-            if varAir.get():
-                aqdaq.start()
-            job1=top1.after(1000,start)
-        def stop():
-            global job1
-            top.after_cancel(job1)
 
         def press():
             global jobpress
@@ -112,19 +125,14 @@ top.mainloop()
             wdaq.humid()
             jobhumid=top.after(1000,humid)
 
-        startButton1 = Tkinter.Button(top1, height=2, width=20, text ="Start", command = start)
-        stopButton1 = Tkinter.Button(top1, height=2, width=20, text ="Stop", command = stop)
         PressureButton = Tkinter.Button(top1, height=2, width=20, text = "Pressure", command = press)
         TempButton = Tkinter.Button(top1, height=2, width=20, text = "Temperature", command = temp)
         HumidButton = Tkinter.Button(top1, height=2, width=20, text = "Humidity", command = humid)
     
-        startButton1.pack()
-        stopButton1.pack()
         PressureButton.pack()
         TempButton.pack()
         HumidButton.pack()
 
-        top1.mainloop()
     
     if varAir.get(): 
         global job2
