@@ -96,7 +96,6 @@ def weather_test(btn):
     AirButton = Tkinter.Checkbutton(top, text="Air Quality", variable=varAir, command = checkbuttona)     
     WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', variable=varWeather, command=checkbuttonw)
     CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", variable=varCO2, command=checkbuttonc)  
-    startButton = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
     stopButton = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)
     PressureButton = Tkinter.Button(top, height=2, width=20, text = "Pressure", command = press)
     TempButton = Tkinter.Button(top, height=2, width=20, text = "Temperature", command = temp)
