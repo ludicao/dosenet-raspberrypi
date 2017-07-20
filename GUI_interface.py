@@ -90,19 +90,19 @@ def weather_test():
             wdaq.humid()
             jobhumid=top.after(1000,humid)
 
-    startButton1 = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
-    stopButton1 = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)
-    PressureButton = Tkinter.Button(top, height=2, width=20, text = "Pressure", command = press)
-    TempButton = Tkinter.Button(top, height=2, width=20, text = "Temperature", command = temp)
-    HumidButton = Tkinter.Button(top, height=2, width=20, text = "Humidity", command = humid)
+        startButton1 = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
+        stopButton1 = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)
+        PressureButton = Tkinter.Button(top, height=2, width=20, text = "Pressure", command = press)
+        TempButton = Tkinter.Button(top, height=2, width=20, text = "Temperature", command = temp)
+        HumidButton = Tkinter.Button(top, height=2, width=20, text = "Humidity", command = humid)
     
-    startButton1.pack()
-    stopButton1.pack()
-    PressureButton.pack()
-    TempButton.pack()
-    HumidButton.pack()
+        startButton1.pack()
+        stopButton1.pack()
+        PressureButton.pack()
+        TempButton.pack()
+        HumidButton.pack()
 
-    top.mainloop()
+        top.mainloop()
     
     if varAir.get(): 
         global job2
@@ -116,12 +116,12 @@ def weather_test():
             global job2
             top.after_cancel(job2)
     
-    startButton2 = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
-    stopButton2 = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)            
-    startButton2.pack()
-    stopButton2.pack()
+        startButton2 = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
+        stopButton2 = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)            
+        startButton2.pack()
+        stopButton2.pack()
     
-    top.mainloop()
+        top.mainloop()
     
             
     if varCO2.get(): 
@@ -136,13 +136,13 @@ def weather_test():
             global job3
             top.after_cancel(job3)
             
-    startButton3 = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
-    stopButton3 = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)            
-    startButton3.pack()
-    stopButton3.pack()
+        startButton3 = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
+        stopButton3 = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)            
+        startButton3.pack()
+        stopButton3.pack()
     
-    top.mainloop()
-        
+        top.mainloop()
+            
 
 AirButton = Tkinter.Checkbutton(top, text="Air Quality", onvalue=True, offvalue=False, variable=varAir)     
 WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', onvalue=True, offvalue=False, variable=varWeather)
