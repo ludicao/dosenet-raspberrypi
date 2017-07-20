@@ -152,10 +152,10 @@ AirButton.pack()
 WeatherButton.pack()
 CO2Button.pack()
 RecordButton.pack()
-top.mainloop()
 
 print("varAir = {}, varCO2 = {}, varWeather = {}".format(varAir.get(),varCO2.get(),varWeather.get()))
     
+top.mainloop()
 
 '''
 def air_quality_test(btn):
