@@ -29,7 +29,7 @@ class adc_DAQ(object):
 	def create_file(self):
 		global adc_results
 		file_time= time.strftime("%Y-%m-%d_%H-%M-%S", time.gmtime())
-		filename = "CO2_test_results_"+file_time+".csv"
+		filename = "/home/pi/data/CO2_test_results_"+file_time+".csv"
 		adc_results=csv.writer(open(filename, "ab+"), delimiter = ",")
 		metadata = []
 		metadata.append("Date and Time")
@@ -70,11 +70,11 @@ class adc_DAQ(object):
 			self.UV_list=[]
 			self.time_list=[]
 
-	def CO2(self):
+	def plot_CO2(self):
 		if len(self.time_queue)>0:
 			self.update_plot(1,self.time_queue,self.CO2_queue,"Time","Concentration (ppm)","Comcentration vs. time")    
 
-	def UV(self):
+	def plot_UV(self):
 		if len(self.time_queue)>0:
 			self.update_plot(2,self.time_queue,self.UV_queue,"Time","UV Index","UV vs.time")		
 
@@ -110,3 +110,6 @@ class adc_DAQ(object):
 			timelist=[]
 		if len(queue)>self.maxdata:
 			queue.popleft()    
+
+	def close(self,plot_id):
+        plt.close(plot_id)		
