@@ -144,14 +144,15 @@ def weather_test():
         top3.mainloop()
             
 
-AirButton = Tkinter.Checkbutton(top, text="Air Quality", onvalue=True, offvalue=False, variable=varAir, command=weather_test)     
-WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', onvalue=True, offvalue=False, variable=varWeather, command=weather_test)
-CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", onvalue=True, offvalue=False, variable=varCO2, command=weather_test)  
+AirButton = Tkinter.Checkbutton(top, text="Air Quality", onvalue=True, offvalue=False, variable=varAir)     
+WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', onvalue=True, offvalue=False, variable=varWeather)
+CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", onvalue=True, offvalue=False, variable=varCO2)
+RecordButton = Tkinter.Button(top, text="Record Data", height=2, width=20, command = weather_test)  
 
 AirButton.pack()   
 WeatherButton.pack()
 CO2Button.pack()
-
+RecordButton.pack()
 top.mainloop()
     
 
