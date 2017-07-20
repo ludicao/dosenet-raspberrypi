@@ -27,18 +27,26 @@ def weather_test(btn):
     varAir = Tkinter.IntVar()
     varWeather = Tkinter.IntVar()
     varCO2 = Tkinter.IntVar()
-    def start():
+    def checkbuttona():
         global job1
+        if varAir.get():
+            aqdaq.start()
+    def checkbuttonw():
+        global job2
         if varWeather.get():
             wdaq.start()
+    def checkbuttonc():
+        global job3
         if varCO2.get():
             adcdaq.start()
-        if varAir.get():
-            aqdaq.start() 
-        job1=top.after(1000,start)
     def stop():
         global job1
-        top.after_cancel(job1)
+        if job1 is not None:
+            top.after_cancel(job1)
+        if job2 is not None:
+            top.after_cancel(job2)
+        if job3 is not None:
+            top.after_cancel(job3)
     def press():
         global jobpress
         global jobhumid
@@ -85,9 +93,9 @@ def weather_test(btn):
         jobhumid=top.after(1000,humid)
      
 
-    AirButton = Tkinter.Checkbutton(top, text="Air Quality", variable=varAir)     
-    WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', variable=varWeather)
-    CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", variable=varCO2)  
+    AirButton = Tkinter.Checkbutton(top, text="Air Quality", variable=varAir, command = checkbuttona)     
+    WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', variable=varWeather, command=checkbuttonw)
+    CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", variable=varCO2, command=checkbuttonc)  
     startButton = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
     stopButton = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)
     PressureButton = Tkinter.Button(top, height=2, width=20, text = "Pressure", command = press)
