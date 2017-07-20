@@ -29,11 +29,11 @@ def weather_test(btn):
     varCO2 = Tkinter.IntVar()
     def start():
         global job1
-        if varWeather.get() == 1:
+        if varWeather.get():
             wdaq.start()
-        if varCO2.get() == 1:
+        if varCO2.get():
             adcdaq.start()
-        if varAir.get() == 1:
+        if varAir.get():
             aqdaq.start() 
         job1=top.after(1000,start)
     def stop():
@@ -85,7 +85,7 @@ def weather_test(btn):
         jobhumid=top.after(1000,humid)
      
 
-         
+    AirButton = Tkinter.Checkbutton(top, text="Air Quality", variable=varAir)     
     WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', variable=varWeather)
     CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", variable=varCO2)  
     startButton = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
@@ -95,6 +95,7 @@ def weather_test(btn):
     HumidButton = Tkinter.Button(top, height=2, width=20, text = "Humidity", command = humid)
     
     WeatherButton.pack()
+    AirButton.pack()
     CO2Button.pack()
     startButton.pack()
     stopButton.pack()
