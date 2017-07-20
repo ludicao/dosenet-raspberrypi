@@ -143,7 +143,7 @@ def make_run_gui():
             top1.after_cancel(jobhumid)
             jobhumid = None
             wdaq.close(2)
-        adcdaq.plot()
+        adcdaq.plot_CO2()
         jobco2=top1.after(1000,CO2)
         
     def airquality():
@@ -168,7 +168,7 @@ def make_run_gui():
             top1.after_cancel(jobhumid)
             jobhumid = None
             wdaq.close(2)
-        aqdaq.plot()
+        aqdaq.pmplot()
         jobhumid=top1.after(1000,humid)
 
     startButton1 = Tkinter.Button(top1, height=2, width=20, text ="Start", command = start)
