@@ -1,4 +1,5 @@
-#!/usr/bin/env/python
+
+i#!/usr/bin/env/python
 from appJar import gui
 import Tkinter
 import weather_DAQ
@@ -23,17 +24,6 @@ jobtemp = None
 def weather_test(btn):
     wdaq.create_file()
     top = Tkinter.Tk()
-
-    
-    varWeather = Tkinter.IntVar()
-    varCO2 = Tkinter.IntVar()
-    def start():
-        global job1
-        if varWeather.get() == 1:
-            wdaq.start()
-        if varCO2.get() == 1:
-            
-
     def start():
         global job1
         wdaq.start()   
@@ -85,22 +75,13 @@ def weather_test(btn):
             wdaq.close(1)
         wdaq.humid()
         jobhumid=top.after(1000,humid)
-     
-
-         
-    WeatherButton = Tkinter.Checkbutton(top, text='Weather Sensor', variable=varWeather)
-    CO2Button = Tkinter.Checkbutton(top, text="CO2 Sensor", variable=varCO2)  
-    
-    
     
     startButton = Tkinter.Button(top, height=2, width=20, text ="Start", command = start)
     stopButton = Tkinter.Button(top, height=2, width=20, text ="Stop", command = stop)
     PressureButton = Tkinter.Button(top, height=2, width=20, text = "Pressure", command = press)
     TempButton = Tkinter.Button(top, height=2, width=20, text = "Temperature", command = temp)
     HumidButton = Tkinter.Button(top, height=2, width=20, text = "Humidity", command = humid)
-    
-    WeatherButton.pack()
-    CO2Button.pack()
+
     
     startButton.pack()
     stopButton.pack()
@@ -151,10 +132,7 @@ def CO2_test(btn):
     stopButton.pack()
 
     top.mainloop()
-
-def weather_plot(btn):
-
-    wdaq.plotdata()    
+  
 
 app.addButton("Record Weather Data", weather_test)
 app.setButtonWidth("Record Weather Data", "30")
@@ -163,5 +141,10 @@ app.setButtonFont("20",font="Helvetica")
 app.addButton("Plot Weather Data",weather_plot)
 app.setButtonWidth("Plot Weather Data","30")
 app.setButtonHeight("Plot Weather Data","4")
-app.setButtonFont("20",font="Helvetica")
+app.addButton("CO2 Test", CO2_test)
+app.setButtonWidth("CO2 Test", "30")
+app.setButtonHeight("CO2 Test","4")
+app.addButton("Air Quality Test", air_quality_test)
+app.setButtonWidth("Air Quality Test", "30")
+app.setButtonHeight("Air Quality Test","4")
 app.go()
